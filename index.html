@@ -377,6 +377,12 @@ footer a {
 <footer>
     <h3>🛍️ GarmBazaar</h3>
     <p>Fresh finds. Creative minds. Everyday essentials.</p>
+    <p>📞 Contact Us:
+        <a href="tel:+917999709054">+91 7999709054</a>
+    </p>
+    <p>
+        <a class="btn" href="tel:+917999709054">📱 Call Now</a>
+    </p>
     <p>© 2026 GarmBazaar. All rights reserved.</p>
     <a href="#home">Back to Top ↑</a>
 </footer>
@@ -388,8 +394,10 @@ footer a {
 
 <script>
 function showNotice(product) {
-    document.getElementById("noticeText").textContent =
-        product + " selected! Contact the store to check availability and order.";
+    const noticeText = document.getElementById("noticeText");
+    noticeText.textContent =
+        product + " selected! Call +91 7999709054 to check availability and order.";
+
     document.getElementById("notice").style.display = "block";
 }
 
