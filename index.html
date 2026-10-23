@@ -4,406 +4,623 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GarmBazaar | Online Store</title>
+<meta name="description" content="GarmBazaar - Discover fresh fruits, groceries, local products and beautiful handmade crafts.">
+<title>GarmBazaar | Fresh Finds, Handmade Treasures</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+:root{
+  --green:#176b38;
+  --green-dark:#123e29;
+  --green-light:#eaf5e9;
+  --gold:#e9b45b;
+  --cream:#fffaf0;
+  --text:#26372c;
+  --muted:#68766b;
+  --white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+
+.topbar{
+  background:var(--green-dark);
+  color:#fff;
+  text-align:center;
+  padding:8px 12px;
+  font-size:13px;
+}
+header{
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 18px #163e2510;
+}
+.nav-container{
+  max-width:1250px;
+  margin:auto;
+  padding:15px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.logo{
+  color:var(--green);
+  font-size:26px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.logo span{color:#c78c30}
+.nav-links{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:5px;
+}
+.nav-links a{
+  padding:10px 11px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:bold;
+  transition:.2s;
+}
+.nav-links a:hover,
+.nav-links a.active{
+  color:var(--green);
+  background:var(--green-light);
+}
+.nav-links .cart-link{
+  background:var(--green);
+  color:white;
+}
+.menu-toggle{
+  display:none;
+  border:0;
+  border-radius:8px;
+  background:var(--green);
+  color:white;
+  padding:9px 13px;
+  font-size:21px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f7faf5;
-    color: #243128;
+.hero{
+  max-width:1450px;
+  margin:auto;
+  padding:65px 7%;
+  min-height:440px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:45px;
+  background:linear-gradient(120deg,#e4f3df,#fff1d6);
+}
+.eyebrow{
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.hero h1{
+  font-size:clamp(38px,5vw,64px);
+  line-height:1.1;
+  margin:16px 0;
+  color:var(--green-dark);
+}
+.hero h1 span{color:#c58b32}
+.hero p{
+  max-width:580px;
+  color:#59685c;
+  font-size:17px;
+  margin-bottom:24px;
+}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;
+  padding:12px 19px;
+  border:0;
+  border-radius:9px;
+  background:var(--green);
+  color:white;
+  font-weight:bold;
+  transition:.2s;
+}
+.btn:hover{background:#104b2a;transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#26372c}
+.btn-gold:hover{background:#dca143}
+.btn-outline{background:white;color:var(--green);border:1px solid #c9d9c8}
+.hero-visual{
+  min-height:300px;
+  border-radius:26px;
+  background:linear-gradient(140deg,#f4dca8,#e7b96b);
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-emoji{font-size:clamp(75px,10vw,130px);filter:drop-shadow(0 12px 8px #68461b25)}
+.float-card{
+  position:absolute;
+  background:white;
+  border-radius:12px;
+  padding:10px 14px;
+  box-shadow:0 8px 25px #0001;
+  font-weight:bold;
+  font-size:13px;
+}
+.float-top{top:22px;left:18px}
+.float-bottom{bottom:22px;right:18px}
+
+.trust-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  padding:25px 7%;
+  background:white;
+}
+.trust-item{text-align:center;padding:8px}
+.trust-item strong{display:block;color:var(--green);margin:5px 0}
+.trust-item span{font-size:26px}
+
+.section{
+  max-width:1250px;
+  margin:auto;
+  padding:58px 22px;
+}
+.section-heading{text-align:center;margin-bottom:30px}
+.section-heading h2{
+  color:var(--green);
+  font-size:clamp(27px,4vw,36px);
+  margin:7px 0;
+}
+.section-heading p{color:var(--muted)}
+.search-area{
+  display:flex;
+  gap:10px;
+  max-width:650px;
+  margin:0 auto 30px;
+}
+.search-area input{
+  width:100%;
+  padding:13px 15px;
+  border:1px solid #d5dfd3;
+  border-radius:9px;
+  background:white;
+  outline:none;
+}
+.search-area input:focus{border-color:var(--green)}
+.collection-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+.collection-card{
+  background:white;
+  border:1px solid #e8eee5;
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:0 7px 22px #193c200b;
+  transition:transform .25s,box-shadow .25s;
+}
+.collection-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 28px #193c2018;
+}
+.collection-image{
+  min-height:190px;
+  display:grid;
+  place-items:center;
+  font-size:78px;
+  background:linear-gradient(135deg,#e6f0dd,#fff0d2);
+}
+.collection-card:nth-child(2) .collection-image{background:linear-gradient(135deg,#f8e3b7,#e8f0df)}
+.collection-card:nth-child(3) .collection-image{background:linear-gradient(135deg,#e6e6f7,#f7e8d9)}
+.collection-content{padding:22px}
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:30px;
+  background:var(--green-light);
+  color:var(--green);
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+.collection-content h3{font-size:21px;margin-bottom:8px}
+.collection-content p{font-size:14px;color:var(--muted);margin-bottom:18px}
+.collection-content .btn{font-size:13px}
+.empty-message{
+  text-align:center;
+  color:var(--muted);
+  padding:20px;
 }
 
-header {
-    background: linear-gradient(135deg, #176b38, #299c50);
-    color: white;
-    text-align: center;
-    padding: 32px 15px;
+.feature-banner{
+  background:var(--green-dark);
+  color:white;
+  border-radius:20px;
+  padding:35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
+.feature-banner h2{font-size:clamp(25px,4vw,34px);margin-bottom:8px}
+.feature-banner p{color:#dbe9dc}
+.feature-banner .btn{background:var(--gold);color:#26372c;white-space:nowrap}
+
+.contact-section{
+  background:#eaf3e6;
+  padding:50px 22px;
+  text-align:center;
+}
+.contact-section h2{color:var(--green);font-size:30px;margin-bottom:10px}
+.contact-section p{color:var(--muted);margin-bottom:20px}
+
+footer{
+  background:#123e29;
+  color:white;
+  padding:40px 7% 20px;
+}
+.footer-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:30px;
+}
+.footer-brand{font-size:24px;font-weight:900;margin-bottom:10px}
+.footer-grid h3{margin-bottom:12px;color:#f0c777}
+.footer-grid p{color:#d5e3d7;font-size:14px}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:14px;color:#d5e3d7}
+.footer-links a:hover{color:white;text-decoration:underline}
+.copyright{
+  max-width:1200px;
+  margin:28px auto 0;
+  border-top:1px solid #ffffff2b;
+  padding-top:18px;
+  text-align:center;
+  color:#d5e3d7;
+  font-size:13px;
 }
 
-header h1 {
-    font-size: clamp(28px, 5vw, 42px);
-    margin-bottom: 10px;
+.toast{
+  display:none;
+  position:fixed;
+  z-index:200;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 30px);
+  max-width:430px;
+  padding:17px;
+  border-radius:12px;
+  color:white;
+  background:var(--green-dark);
+  text-align:center;
+  box-shadow:0 8px 30px #0003;
 }
-
-header p {
-    font-size: 16px;
+.toast button{
+  margin-left:10px;
+  padding:7px 12px;
+  border:0;
+  border-radius:6px;
+  background:white;
+  color:var(--green);
 }
+[hidden]{display:none!important}
 
-nav {
-    background: #173b28;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 14px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+@media(max-width:1050px){
+  .nav-container{flex-wrap:wrap}
+  .menu-toggle{display:block}
+  .nav-links{
+    display:none;
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+    gap:3px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px}
+  .hero{padding:50px 5%;gap:25px}
 }
-
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 14px;
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr}
+  .hero-visual{min-height:230px}
+  .collection-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .collection-image{min-height:150px;font-size:60px}
+  .collection-content{padding:15px}
+  .trust-row{padding:20px 4%;gap:8px}
+  .trust-item{font-size:12px}
+  .feature-banner{flex-direction:column;align-items:flex-start;padding:25px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-brand-block{grid-column:1/-1}
 }
-
-nav a:hover {
-    background: #2b9450;
-}
-
-.hero {
-    text-align: center;
-    padding: 65px 20px;
-    background: linear-gradient(120deg, #e1f5df, #fff8e6);
-}
-
-.hero h2 {
-    font-size: clamp(28px, 5vw, 42px);
-    color: #176b38;
-    margin-bottom: 16px;
-}
-
-.hero p {
-    max-width: 650px;
-    margin: 0 auto 25px;
-    line-height: 1.7;
-    color: #526256;
-}
-
-.btn {
-    display: inline-block;
-    background: #218744;
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: #145e2d;
-}
-
-.section {
-    padding: 45px 20px;
-    max-width: 1200px;
-    margin: auto;
-    scroll-margin-top: 75px;
-}
-
-.section h2 {
-    text-align: center;
-    color: #176b38;
-    margin-bottom: 12px;
-    font-size: 30px;
-}
-
-.description {
-    text-align: center;
-    color: #68756a;
-    margin-bottom: 30px;
-}
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 22px;
-}
-
-.card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px #193c2012;
-    border: 1px solid #e6eee5;
-    transition: transform 0.25s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card img {
-    display: block;
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    background: #e8eee7;
-}
-
-.card-content {
-    padding: 20px;
-}
-
-.card h3 {
-    color: #236c3a;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #647067;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 16px;
-}
-
-.category {
-    display: inline-block;
-    font-size: 12px;
-    color: #23753c;
-    background: #e4f6e6;
-    border-radius: 20px;
-    padding: 6px 10px;
-    margin-bottom: 12px;
-}
-
-footer {
-    background: #173b28;
-    color: white;
-    text-align: center;
-    padding: 28px 15px;
-    line-height: 1.9;
-}
-
-footer a {
-    color: #b9f6c7;
-}
-
-.notice {
-    display: none;
-    position: fixed;
-    left: 50%;
-    bottom: 25px;
-    transform: translateX(-50%);
-    width: calc(100% - 32px);
-    max-width: 420px;
-    padding: 18px;
-    background: #173b28;
-    color: white;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 5px 25px #0003;
-    z-index: 20;
-}
-
-.notice button {
-    margin-top: 12px;
-    padding: 8px 18px;
-    border: 0;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-@media (max-width: 480px) {
-    nav {
-        gap: 2px;
-    }
-
-    nav a {
-        padding: 9px;
-        font-size: 13px;
-    }
-
-    .hero {
-        padding: 45px 16px;
-    }
-
-    .section {
-        padding: 35px 15px;
-    }
+@media(max-width:480px){
+  .topbar{font-size:11px}
+  .nav-container{padding:13px 15px}
+  .logo{font-size:22px}
+  .hero{padding:40px 20px}
+  .hero p{font-size:15px}
+  .collection-grid{grid-template-columns:1fr}
+  .collection-image{min-height:170px}
+  .section{padding:40px 16px}
+  .search-area{flex-direction:column}
+  .trust-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand-block{grid-column:auto}
 }
 </style>
 </head>
 
 <body>
 
-<header id="home">
-    <h1>🛍️ GarmBazaar</h1>
-    <p>Your favourite destination for fresh products and handmade crafts!</p>
+<div class="topbar">
+  🌿 Discover fresh finds, local products and handmade treasures!
+</div>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">🛍️ Garm<span>Bazaar</span></a>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+      <a class="active" href="index.html">🏠 Home</a>
+      <a href="fruits.html">🍎 Fruits</a>
+      <a href="groceries.html">🛒 Groceries</a>
+      <a href="handmade-crafts.html">🎨 Handmade Crafts</a>
+      <a href="local-products.html">🌱 Local Products</a>
+      <a href="about.html">ℹ️ About</a>
+      <a href="product-desc.html">📦 Product Details</a>
+      <a href="user-dashboard.html">👤 Dashboard</a>
+      <a href="User-cart" class="cart-link">🛍️ My Cart</a>
+    </nav>
+  </div>
 </header>
 
-<nav>
-    <a href="#home">🏠 Home</a>
-    <a href="#fruits">🍎 Fruits</a>
-    <a href="#groceries">🛒 Groceries</a>
-    <a href="#crafts">🎨 Handmade Crafts</a>
-</nav>
-
-<section class="hero">
-    <h2>Welcome to GarmBazaar!</h2>
-    <p>
-        Discover fresh fruits, everyday grocery essentials and
-        unique handmade creations. Explore our collections below.
-    </p>
-    <a href="#collections" class="btn">Explore Collections ↓</a>
-</section>
-
-<section class="section" id="collections">
-    <h2>Our Collections</h2>
-    <p class="description">Choose a category and discover something special.</p>
-
-    <div class="products">
-        <article class="card">
-            <img
-                src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"
-                alt="Fresh apples and fruits">
-            <div class="card-content">
-                <span class="category">Fresh & Healthy</span>
-                <h3>Fresh Fruits 🍎</h3>
-                <p>Explore delicious fruits for your everyday meals.</p>
-                <a class="btn" href="#fruits">Explore Fruits</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <img
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80"
-                alt="Fresh grocery vegetables">
-            <div class="card-content">
-                <span class="category">Everyday Essentials</span>
-                <h3>Groceries 🛒</h3>
-                <p>Discover everyday kitchen and household essentials.</p>
-                <a class="btn" href="#groceries">Explore Groceries</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <img
-                src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=600&q=80"
-                alt="Creative handmade craft materials">
-            <div class="card-content">
-                <span class="category">Made with Love</span>
-                <h3>Handmade Crafts 🎨</h3>
-                <p>Find creative inspiration and beautiful handmade items.</p>
-                <a class="btn" href="#crafts">Explore Crafts</a>
-            </div>
-        </article>
+<main>
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">Fresh Finds • Local Love • Handmade Heritage</div>
+      <h1>Welcome to <span>GarmBazaar!</span></h1>
+      <p>
+        Discover fresh fruits, everyday grocery essentials, locally made products
+        and beautiful handmade crafts—all in one place.
+        Explore our collections and find something special for your home.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn" href="#collections">Explore Collections ↓</a>
+        <a class="btn btn-outline" href="about.html">About Us</a>
+      </div>
     </div>
-</section>
 
-<section class="section" id="fruits">
-    <h2>🍎 Fresh Fruits</h2>
-    <p class="description">Fresh ideas for a colourful fruit basket.</p>
-
-    <div class="products">
-        <article class="card">
-            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"
-                 alt="Red apples">
-            <div class="card-content">
-                <h3>Fresh Apples</h3>
-                <p>Delicious fruit for your everyday routine.</p>
-                <button class="btn" onclick="showNotice('Fresh Apples')">Enquire Now</button>
-            </div>
-        </article>
-
-        <article class="card">
-            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80"
-                 alt="Fresh bananas">
-            <div class="card-content">
-                <h3>Fresh Bananas</h3>
-                <p>A versatile fruit for snacks and breakfast.</p>
-                <button class="btn" onclick="showNotice('Fresh Bananas')">Enquire Now</button>
-            </div>
-        </article>
+    <div class="hero-visual" aria-label="Fresh fruits, groceries and handmade crafts">
+      <span class="float-card float-top">🌿 Local & Fresh</span>
+      <span class="hero-emoji">🧺🍎🎨</span>
+      <span class="float-card float-bottom">💚 Made with Care</span>
     </div>
-</section>
+  </section>
 
-<section class="section" id="groceries">
-    <h2>🛒 Groceries</h2>
-    <p class="description">Everyday essentials for your home.</p>
-
-    <div class="products">
-        <article class="card">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80"
-                 alt="Fresh vegetables">
-            <div class="card-content">
-                <h3>Fresh Vegetables</h3>
-                <p>Explore vegetables for your favourite recipes.</p>
-                <button class="btn" onclick="showNotice('Fresh Vegetables')">Enquire Now</button>
-            </div>
-        </article>
-
-        <article class="card">
-            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80"
-                 alt="Food and pantry ingredients">
-            <div class="card-content">
-                <h3>Kitchen Essentials</h3>
-                <p>Discover useful pantry and cooking essentials.</p>
-                <button class="btn" onclick="showNotice('Kitchen Essentials')">Enquire Now</button>
-            </div>
-        </article>
+  <div class="trust-row">
+    <div class="trust-item">
+      <span>🍎</span>
+      <strong>Fresh Finds</strong>
+      <p>Everyday favourites</p>
     </div>
-</section>
-
-<section class="section" id="crafts">
-    <h2>🎨 Handmade Crafts</h2>
-    <p class="description">Creative finds and unique handmade inspiration.</p>
-
-    <div class="products">
-        <article class="card">
-            <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=600&q=80"
-                 alt="Handmade art materials">
-            <div class="card-content">
-                <h3>Creative Art</h3>
-                <p>Explore artistic ideas and creative supplies.</p>
-                <button class="btn" onclick="showNotice('Creative Art')">Enquire Now</button>
-            </div>
-        </article>
-
-        <article class="card">
-            <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=600&q=80"
-                 alt="Handcrafted decorative items">
-            <div class="card-content">
-                <h3>Decorative Crafts</h3>
-                <p>Add a personal touch to your home with creative decor.</p>
-                <button class="btn" onclick="showNotice('Decorative Crafts')">Enquire Now</button>
-            </div>
-        </article>
+    <div class="trust-item">
+      <span>🌱</span>
+      <strong>Local Products</strong>
+      <p>Discover local collections</p>
     </div>
-</section>
+    <div class="trust-item">
+      <span>🎨</span>
+      <strong>Handmade Treasures</strong>
+      <p>Creative artisan products</p>
+    </div>
+  </div>
+
+  <section class="section" id="collections">
+    <div class="section-heading">
+      <div class="eyebrow">Explore GarmBazaar</div>
+      <h2>Discover Our Collections</h2>
+      <p>Choose a category and explore the products you love.</p>
+    </div>
+
+    <div class="search-area">
+      <input id="collection-search" type="search" placeholder="🔍 Search collections..." aria-label="Search collections">
+    </div>
+
+    <div class="collection-grid" id="collection-grid">
+
+      <article class="collection-card" data-search="fruits apples bananas fresh healthy">
+        <div class="collection-image">🍎🍌🍊</div>
+        <div class="collection-content">
+          <span class="tag">Fresh & Healthy</span>
+          <h3>Fresh Fruits</h3>
+          <p>Explore fruit favourites for your everyday meals and snacks.</p>
+          <a class="btn" href="fruits.html">Explore Fruits →</a>
+        </div>
+      </article>
+
+      <article class="collection-card" data-search="groceries vegetables pantry kitchen essentials">
+        <div class="collection-image">🥦🥕🛒</div>
+        <div class="collection-content">
+          <span class="tag">Everyday Essentials</span>
+          <h3>Groceries</h3>
+          <p>Discover kitchen ingredients and household essentials.</p>
+          <a class="btn" href="groceries.html">Explore Groceries →</a>
+        </div>
+      </article>
+
+      <article class="collection-card" data-search="handmade crafts art creative decor">
+        <div class="collection-image">🎨🧶🪔</div>
+        <div class="collection-content">
+          <span class="tag">Made with Love</span>
+          <h3>Handmade Crafts</h3>
+          <p>Find creative decorations, traditional art and handmade gifts.</p>
+          <a class="btn" href="handmade-crafts.html">Explore Crafts →</a>
+        </div>
+      </article>
+
+      <article class="collection-card" data-search="local products regional local makers">
+        <div class="collection-image">🌾🧺🌿</div>
+        <div class="collection-content">
+          <span class="tag">Support Local</span>
+          <h3>Local Products</h3>
+          <p>Explore locally sourced products and regional favourites.</p>
+          <a class="btn" href="local-products.html">Explore Local →</a>
+        </div>
+      </article>
+
+      <article class="collection-card" data-search="product details descriptions information">
+        <div class="collection-image">📦🔎✨</div>
+        <div class="collection-content">
+          <span class="tag">Know More</span>
+          <h3>Product Details</h3>
+          <p>Visit the product details page for more product information.</p>
+          <a class="btn" href="product-desc.html">View Details →</a>
+        </div>
+      </article>
+
+      <article class="collection-card" data-search="user dashboard profile account">
+        <div class="collection-image">👤💚📊</div>
+        <div class="collection-content">
+          <span class="tag">Your Account</span>
+          <h3>User Dashboard</h3>
+          <p>Open your dashboard and explore your account page.</p>
+          <a class="btn" href="user-dashboard.html">Open Dashboard →</a>
+        </div>
+      </article>
+
+    </div>
+    <p class="empty-message" id="empty-search" hidden>No collections match your search.</p>
+  </section>
+
+  <section class="section">
+    <div class="feature-banner">
+      <div>
+        <h2>Something special is waiting for you!</h2>
+        <p>Explore local products and creative handmade collections.</p>
+      </div>
+      <a href="handmade-crafts.html" class="btn">Discover Crafts ↗</a>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <h2>Need Help? We're Here!</h2>
+    <p>Contact us for product availability and general enquiries.</p>
+    <a class="btn" href="tel:+917999709054">📞 Call +91 7999709054</a>
+  </section>
+</main>
 
 <footer>
-    <h3>🛍️ GarmBazaar</h3>
-    <p>Fresh finds. Creative minds. Everyday essentials.</p>
-    <p>📞 Contact Us:
-        <a href="tel:+917999709054">+91 7999709054</a>
-    </p>
-    <p>
-        <a class="btn" href="tel:+917999709054">📱 Call Now</a>
-    </p>
+  <div class="footer-grid">
+    <div class="footer-brand-block">
+      <div class="footer-brand">🛍️ GarmBazaar</div>
+      <p>Fresh finds, local products and creative handmade treasures.</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="local-products.html">Local Products</a>
+        <a href="handmade-crafts.html">Handmade Crafts</a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Shop & Account</h3>
+      <div class="footer-links">
+        <a href="fruits.html">Fruits</a>
+        <a href="groceries.html">Groceries</a>
+        <a href="product-desc.html">Product Details</a>
+        <a href="user-dashboard.html">User Dashboard</a>
+        <a href="User-cart">My Cart</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <p>📞 <a href="tel:+917999709054">+91 7999709054</a></p>
     <p>© 2026 GarmBazaar. All rights reserved.</p>
-    <a href="#home">Back to Top ↑</a>
+    <p><a href="#home">Back to Top ↑</a></p>
+  </div>
 </footer>
 
-<div class="notice" id="notice" role="status" aria-live="polite">
-    <p id="noticeText"></p>
-    <button onclick="closeNotice()">Close</button>
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span id="toast-message"></span>
+  <button id="toast-close" type="button">Close</button>
 </div>
 
 <script>
-function showNotice(product) {
-    const noticeText = document.getElementById("noticeText");
-    noticeText.textContent =
-        product + " selected! Call +91 7999709054 to check availability and order.";
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
 
-    document.getElementById("notice").style.display = "block";
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+// Close the mobile navigation after choosing a page.
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  });
+});
+
+// Mark the current page in the navigation.
+const currentPage = window.location.pathname.split("/").pop() || "index.html";
+navLinks.querySelectorAll("a").forEach(link => {
+  const target = link.getAttribute("href");
+  if (target === currentPage) {
+    link.classList.add("active");
+    link.setAttribute("aria-current", "page");
+  }
+});
+
+// Search the homepage collection cards.
+const searchInput = document.getElementById("collection-search");
+const cards = [...document.querySelectorAll(".collection-card")];
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const matches = card.dataset.search.includes(query);
+    card.hidden = !matches;
+    if (matches) visibleCount++;
+  });
+
+  document.getElementById("empty-search").hidden = visibleCount !== 0;
+});
+
+// Optional reusable notification for homepage features.
+function showNotice(message) {
+  document.getElementById("toast-message").textContent = message;
+  document.getElementById("toast").style.display = "block";
 }
 
 function closeNotice() {
-    document.getElementById("notice").style.display = "none";
+  document.getElementById("toast").style.display = "none";
 }
+
+document.getElementById("toast-close").addEventListener("click", closeNotice);
 </script>
 
 </body>
