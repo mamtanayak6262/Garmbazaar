@@ -1,1 +1,186 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Description</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #228b22;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 12px;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: white;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px #cccccc;
+        }
+
+        .product-image {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            max-width: 350px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .details {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .details h2 {
+            color: #228b22;
+        }
+
+        .price {
+            color: green;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .details ul {
+            line-height: 2;
+        }
+
+        button {
+            background-color: #228b22;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #155d15;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #228b22;
+            margin-top: 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ My Online Store</h1>
+        <p>Product Details and Description</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="Fruits.html">Fruits</a>
+        <a href="Groceries.html">Groceries</a>
+        <a href="Handmade-crafts.html">Handmade Crafts</a>
+        <a href="local-products.html">Local Products</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="product-image">
+            <img
+                src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500"
+                alt="Fresh red apple">
+        </div>
+
+        <div class="details">
+            <h2>Fresh Red Apple</h2>
+
+            <p class="price">₹120 / kg</p>
+
+            <p>
+                Enjoy fresh, delicious and juicy apples.
+                Apples are a tasty fruit that can be enjoyed
+                as a healthy snack every day.
+            </p>
+
+            <h3>Product Features</h3>
+
+            <ul>
+                <li>Fresh and delicious</li>
+                <li>Suitable for everyday snacks</li>
+                <li>Carefully selected fruit</li>
+                <li>Available by weight</li>
+            </ul>
+
+            <p><strong>Category:</strong> Fresh Fruits</p>
+
+            <p><strong>Availability:</strong> In Stock</p>
+
+            <button onclick="alert('Thank you for your interest in Fresh Red Apple!')">
+                Buy Now
+            </button>
+
+            <button onclick="history.back()">
+                Go Back
+            </button>
+
+            <br>
+
+            <a class="back-link" href="Fruits.html">
+                View More Fruits
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 My Online Store. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
