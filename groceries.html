@@ -1,94 +1,528 @@
-
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groceries</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#075c32">
+  <meta name="description" content="Shop grocery essentials on GramBazaar.">
+  <title>Groceries & Essentials | GramBazaar</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5fff0;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
+  <style>
+    :root {
+      --green: #075c32;
+      --green-dark: #123e29;
+      --green-light: #eaf7ed;
+      --cream: #fffaf0;
+      --text: #26332a;
+      --muted: #718076;
+      --border: #e6ece7;
+      --orange: #f19b38;
+    }
 
-        h1 {
-            color: green;
-        }
+    * { box-sizing: border-box; }
 
-        .groceries {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+    }
 
-        .item {
-            background-color: white;
-            width: 180px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px #cccccc;
-        }
+    button, input { font: inherit; }
 
-        .item img {
-            width: 150px;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+    .hero {
+      text-align: center;
+      padding: 55px 20px;
+      background: linear-gradient(135deg, #e0f3df, #fff0d2);
+    }
 
-        .item h2 {
-            color: #ff6600;
-        }
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
 
-        .price {
-            color: green;
-            font-weight: bold;
-        }
-    </style>
+    .hero h1 {
+      margin: 12px 0;
+      color: var(--green);
+      font-size: clamp(32px, 5vw, 48px);
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 35px 20px 60px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .toolbar h2 {
+      color: var(--green);
+      font-size: 26px;
+      margin: 0;
+    }
+
+    .search-box {
+      width: min(100%, 340px);
+      padding: 12px 15px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .search-box:focus { border-color: var(--green); }
+
+    .grocery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px #173c2008;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px #173c2014;
+    }
+
+    .item img {
+      display: block;
+      width: 100%;
+      height: 185px;
+      object-fit: cover;
+      background: var(--green-light);
+    }
+
+    .item-content { padding: 17px; }
+
+    .item h3 {
+      color: var(--green);
+      font-size: 19px;
+      margin: 0 0 7px;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 42px;
+      margin: 0 0 14px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .unit {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .add-btn {
+      width: 100%;
+      padding: 11px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .add-btn:hover { background: #064825; }
+
+    .empty-state {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 35px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .notice {
+      position: fixed;
+      z-index: 200;
+      bottom: 20px;
+      left: 50%;
+      max-width: 90%;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: var(--green);
+      color: white;
+      box-shadow: 0 5px 20px #0002;
+      text-align: center;
+      opacity: 0;
+      transform: translate(-50%, 20px);
+      pointer-events: none;
+      transition: .25s;
+    }
+
+    .notice.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .info-banner {
+      margin-top: 35px;
+      padding: 25px;
+      background: var(--green-light);
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .info-banner h3 {
+      color: var(--green);
+      margin: 0 0 8px;
+    }
+
+    .info-banner p {
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 22px;
+      text-align: center;
+      background: var(--green-dark);
+      color: #dce9dd;
+      font-size: 13px;
+    }
+
+    @media (max-width: 950px) {
+      .grocery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 650px) {
+      .grocery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .item img { height: 145px; }
+      .item-content { padding: 13px; }
+      .container { padding: 25px 13px 45px; }
+      .toolbar h2 { font-size: 22px; }
+    }
+
+    @media (max-width: 360px) {
+      .grocery-grid { grid-template-columns: 1fr; }
+      .item img { height: 210px; }
+    }
+  </style>
 </head>
 
 <body>
 
-    <h1>🛒 Welcome to Grocery Store</h1>
-    <p>Fresh and quality products for your home!</p>
+  <!-- Shared GramBazaar navigation -->
+  <div id="gb-common-nav"></div>
 
-    <div class="groceries">
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Everyday Essentials • Local Bazaar</div>
+      <h1>🛒 Grocery & Staples</h1>
+      <p>
+        Discover everyday kitchen essentials on GramBazaar.
+        Browse your favourites and add them to your shopping cart.
+      </p>
+    </section>
 
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300"
-                 alt="Rice">
-            <h2>Rice</h2>
-            <p class="price">₹60 / kg</p>
+    <section class="container">
+      <div class="toolbar">
+        <h2>Our Grocery Collection 🌾</h2>
+        <input
+          type="search"
+          class="search-box"
+          id="grocerySearch"
+          placeholder="Search rice, oil, wheat..."
+          aria-label="Search grocery products"
+        >
+      </div>
+
+      <div class="grocery-grid" id="groceryGrid">
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600"
+            alt="Rice grains"
+            loading="lazy"
+          >
+          <div class="item-content">
+            <h3>Premium Rice</h3>
+            <p class="description">A versatile kitchen staple for everyday meals.</p>
+            <div class="price-row">
+              <span class="price">₹60</span>
+              <span class="unit">/ kg</span>
+            </div>
+            <button class="add-btn" data-id="rice" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600"
+            alt="Cooking oil"
+            loading="lazy"
+          >
+          <div class="item-content">
+            <h3>Cooking Oil</h3>
+            <p class="description">An everyday essential for your kitchen.</p>
+            <div class="price-row">
+              <span class="price">₹150</span>
+              <span class="unit">/ litre</span>
+            </div>
+            <button class="add-btn" data-id="oil" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600"
+            alt="Wheat grains"
+            loading="lazy"
+          >
+          <div class="item-content">
+            <h3>Whole Wheat</h3>
+            <p class="description">A traditional staple for everyday cooking.</p>
+            <div class="price-row">
+              <span class="price">₹35</span>
+              <span class="unit">/ kg</span>
+            </div>
+            <button class="add-btn" data-id="wheat" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600"
+            alt="Golden honey"
+            loading="lazy"
+          >
+          <div class="item-content">
+            <h3>Natural Honey</h3>
+            <p class="description">A sweet pantry favourite for many recipes.</p>
+            <div class="price-row">
+              <span class="price">₹200</span>
+              <span class="unit">/ jar</span>
+            </div>
+            <button class="add-btn" data-id="honey" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600"
+            alt="Milk"
+            loading="lazy"
+          >
+          <div class="item-content">
+            <h3>Fresh Milk</h3>
+            <p class="description">A household favourite for drinks and recipes.</p>
+            <div class="price-row">
+              <span class="price">₹30</span>
+              <span class="unit">/ litre</span>
+            </div>
+            <button class="add-btn" data-id="milk" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600"
+            alt="Lentils and pulses"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/eaf7ed/075c32?text=Lentils+%26+Pulses'"
+          >
+          <div class="item-content">
+            <h3>Lentils & Dal</h3>
+            <p class="description">A pantry staple used in many home-cooked meals.</p>
+            <div class="price-row">
+              <span class="price">₹110</span>
+              <span class="unit">/ kg</span>
+            </div>
+            <button class="add-btn" data-id="dal" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1601593768790-1f7f5c7f9e6a?w=600"
+            alt="Sugar"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/eaf7ed/075c32?text=Sugar'"
+          >
+          <div class="item-content">
+            <h3>Sugar</h3>
+            <p class="description">A common ingredient for tea and baking.</p>
+            <div class="price-row">
+              <span class="price">₹45</span>
+              <span class="unit">/ kg</span>
+            </div>
+            <button class="add-btn" data-id="sugar" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="item">
+          <img
+            src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600"
+            alt="Spices"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/eaf7ed/075c32?text=Indian+Spices'"
+          >
+          <div class="item-content">
+            <h3>Indian Spices</h3>
+            <p class="description">Add aroma and flavour to your favourite dishes.</p>
+            <div class="price-row">
+              <span class="price">₹80</span>
+              <span class="unit">/ pack</span>
+            </div>
+            <button class="add-btn" data-id="spices" type="button">＋ Add to Cart</button>
+          </div>
+        </article>
+
+        <div class="empty-state" id="emptyState">
+          <h3>No products found 🌿</h3>
+          <p>Try searching for another grocery item.</p>
         </div>
+      </div>
 
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300"
-                 alt="Cooking Oil">
-            <h2>Cooking Oil</h2>
-            <p class="price">₹150 / litre</p>
-        </div>
+      <div class="info-banner">
+        <h3>🌿 Your Local Bazaar, Online</h3>
+        <p>
+          Add products to your cart and review your order before checkout.
+          Prices displayed here are examples; actual price and availability
+          should be confirmed with your seller.
+        </p>
+      </div>
+    </section>
+  </main>
 
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300"
-                 alt="Wheat">
-            <h2>Wheat</h2>
-            <p class="price">₹35 / kg</p>
-        </div>
+  <div class="notice" id="notice" role="status" aria-live="polite"></div>
 
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300"
-                 alt="Honey">
-            <h2>Honey</h2>
-            <p class="price">₹200 / jar</p>
-        </div>
+  <footer>
+    <p>© 2026 GramBazaar. All rights reserved.</p>
+    <p>Apne gaon ka bazaar, ab online 🌿</p>
+  </footer>
 
-    </div>
+  <script>
+    /*
+      IMPORTANT:
+      This shared cart key must match the homepage and User-cart.html.
+    */
+    const CART_KEY = "gb-cart";
+
+    const products = {
+      rice:   { id: "rice", name: "Premium Rice", price: 60, emoji: "🍚" },
+      oil:    { id: "oil", name: "Cooking Oil", price: 150, emoji: "🫒" },
+      wheat:  { id: "wheat", name: "Whole Wheat", price: 35, emoji: "🌾" },
+      honey:  { id: "honey", name: "Natural Honey", price: 200, emoji: "🍯" },
+      milk:   { id: "milk", name: "Fresh Milk", price: 30, emoji: "🥛" },
+      dal:    { id: "dal", name: "Lentils & Dal", price: 110, emoji: "🫘" },
+      sugar:  { id: "sugar", name: "Sugar", price: 45, emoji: "🧂" },
+      spices: { id: "spices", name: "Indian Spices", price: 80, emoji: "🌶️" }
+    };
+
+    function getCart() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(stored) ? stored : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+      if (window.GBNav &&
+          typeof window.GBNav.refreshCartCount === "function") {
+        window.GBNav.refreshCartCount();
+      }
+
+      window.dispatchEvent(new Event("gb-cart-updated"));
+    }
+
+    function showNotice(message) {
+      const notice = document.getElementById("notice");
+      notice.textContent = message;
+      notice.classList.add("show");
+
+      clearTimeout(showNotice.timer);
+      showNotice.timer = setTimeout(() => {
+        notice.classList.remove("show");
+      }, 2400);
+    }
+
+    document.querySelectorAll(".add-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const product = products[button.dataset.id];
+        if (!product) return;
+
+        const cart = getCart();
+        const existing = cart.find(item => item.id === product.id);
+
+        if (existing) {
+          existing.quantity = Math.min(
+            99, (Number(existing.quantity) || 1) + 1
+          );
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+
+        saveCart(cart);
+        showNotice("✓ " + product.name + " added to your cart!");
+      });
+    });
+
+    document.getElementById("grocerySearch").addEventListener("input", event => {
+      const query = event.target.value.trim().toLowerCase();
+      let visible = 0;
+
+      document.querySelectorAll(".item").forEach(card => {
+        const matches = card.textContent.toLowerCase().includes(query);
+        card.style.display = matches ? "" : "none";
+        if (matches) visible++;
+      });
+
+      document.getElementById("emptyState").style.display =
+        visible ? "none" : "block";
+    });
+  </script>
+
+  <!-- Common navigation -->
+  <script src="common-nav.js"></script>
 
 </body>
 </html>
