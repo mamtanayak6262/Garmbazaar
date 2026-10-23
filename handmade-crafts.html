@@ -1,1 +1,124 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handmade Crafts</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8f0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #8b4513;
+        }
+
+        .crafts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .craft {
+            background-color: white;
+            width: 200px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px #cccccc;
+        }
+
+        .craft img {
+            width: 180px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .craft h2 {
+            color: #a0522d;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a0522d;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎨 Handmade Crafts Store</h1>
+    <p>Discover beautiful handmade products made with love!</p>
+
+    <div class="crafts">
+
+        <div class="craft">
+            <img src="https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=300"
+                 alt="Handmade pottery">
+            <h2>Handmade Pottery</h2>
+            <p>Beautiful clay creations.</p>
+            <p class="price">₹350</p>
+            <button onclick="alert('Thank you for your interest!')">Buy Now</button>
+        </div>
+
+        <div class="craft">
+            <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=300"
+                 alt="Handmade decoration">
+            <h2>Home Decor</h2>
+            <p>Decorate your home naturally.</p>
+            <p class="price">₹500</p>
+            <button onclick="alert('Thank you for your interest!')">Buy Now</button>
+        </div>
+
+        <div class="craft">
+            <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=300"
+                 alt="Handmade art">
+            <h2>Handmade Art</h2>
+            <p>Creative art for every space.</p>
+            <p class="price">₹250</p>
+            <button onclick="alert('Thank you for your interest!')">Buy Now</button>
+        </div>
+
+        <div class="craft">
+            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=300"
+                 alt="Handmade crafts and artwork">
+            <h2>Wall Crafts</h2>
+            <p>Make your walls look beautiful.</p>
+            <p class="price">₹400</p>
+            <button onclick="alert('Thank you for your interest!')">Buy Now</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Handmade Crafts Store | Made with ❤️</p>
+    </footer>
+
+</body>
+</html>
