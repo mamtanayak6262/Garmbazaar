@@ -1,176 +1,403 @@
-
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Products Store</title>
+    <title>Local Products | GramBazaar</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #fffaf0;
+            background: #fffaf0;
+            color: #333;
         }
 
-        header {
-            background-color: #8b4513;
+        .hero {
+            background: linear-gradient(135deg, #8b4513, #c47a36);
             color: white;
             text-align: center;
-            padding: 25px;
+            padding: 45px 20px;
         }
 
-        nav {
-            background-color: #333;
-            text-align: center;
-            padding: 15px;
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 42px);
+            margin: 0 0 12px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 12px;
-            display: inline-block;
+        .hero p {
+            margin: 0;
+            line-height: 1.6;
         }
 
-        nav a:hover {
-            color: orange;
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 20px 45px;
         }
 
-        .intro {
-            text-align: center;
-            padding: 20px;
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .toolbar h2 {
+            color: #8b4513;
+            margin: 0;
+        }
+
+        #productSearch {
+            width: min(100%, 320px);
+            padding: 12px 16px;
+            border: 1px solid #dfc6ae;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        #productSearch:focus {
+            border-color: #8b4513;
         }
 
         .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
         }
 
         .product {
-            background-color: white;
-            width: 220px;
-            padding: 15px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px #cccccc;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px #00000012;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px #0000001c;
         }
 
         .product img {
+            display: block;
             width: 100%;
-            height: 160px;
+            height: 190px;
             object-fit: cover;
-            border-radius: 8px;
+            background: #f0e3d3;
         }
 
-        .product h2 {
+        .product-info {
+            padding: 17px;
+        }
+
+        .product h3 {
             color: #8b4513;
+            font-size: 19px;
+            margin: 0 0 10px;
+        }
+
+        .product p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 42px;
+            margin: 0 0 12px;
         }
 
         .price {
-            color: green;
+            color: #218344;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background: #8b4513;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
             font-weight: bold;
         }
 
-        button {
-            background-color: #8b4513;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
+        .add-btn:hover {
+            background: #a0522d;
         }
 
-        button:hover {
-            background-color: #a0522d;
+        #noResults {
+            display: none;
+            text-align: center;
+            color: #765b48;
+            padding: 30px 10px;
         }
 
         footer {
-            background-color: #333;
+            background: #333;
             color: white;
             text-align: center;
-            padding: 15px;
-            margin-top: 20px;
+            padding: 20px 12px;
+            line-height: 1.6;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 900px) {
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 22px 12px 35px;
+            }
+
+            .products {
+                gap: 12px;
+            }
+
+            .product img {
+                height: 140px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product h3 {
+                font-size: 16px;
+            }
+
+            .product p {
+                font-size: 13px;
+            }
+
+            .price {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <header>
+    <!-- Shared GramBazaar navbar -->
+    <div id="gb-common-nav"></div>
+
+    <section class="hero">
         <h1>🏡 Local Products Store</h1>
-        <p>Support Local Sellers and Shop Local Products!</p>
-    </header>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="Fruits.html">Fruits</a>
-        <a href="Groceries.html">Groceries</a>
-        <a href="Handmade-crafts.html">Handmade Crafts</a>
-        <a href="local-products.html">Local Products</a>
-    </nav>
-
-    <section class="intro">
-        <h2>Our Local Products</h2>
-        <p>Discover quality products made and sold by local communities.</p>
+        <p>Support local sellers and discover products made by your community!</p>
     </section>
 
-    <section class="products">
+    <main class="container">
 
-        <div class="product">
-            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484df?w=400"
-                 alt="Fresh homemade bread">
-            <h2>Homemade Bread</h2>
-            <p>Fresh and delicious local bread.</p>
-            <p class="price">₹80 / loaf</p>
-            <button onclick="alert('Thank you for your interest in Homemade Bread!')">
-                Buy Now
-            </button>
+        <div class="toolbar">
+            <h2>Discover Local Products</h2>
+            <input
+                type="search"
+                id="productSearch"
+                placeholder="Search local products..."
+                aria-label="Search local products"
+            >
         </div>
 
-        <div class="product">
-            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=400"
-                 alt="Natural honey">
-            <h2>Natural Honey</h2>
-            <p>Sweet honey from local producers.</p>
-            <p class="price">₹200 / jar</p>
-            <button onclick="alert('Thank you for your interest in Natural Honey!')">
-                Buy Now
-            </button>
+        <section class="products" id="productList">
+
+            <article class="product"
+                data-id="local-bread"
+                data-name="Homemade Bread"
+                data-price="80"
+                data-emoji="🍞">
+
+                <img
+                    src="https://images.unsplash.com/photo-1608198093002-ad4e005484df?w=500"
+                    alt="Fresh homemade bread"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/500x350/f0dfce/80451f?text=Homemade+Bread'">
+
+                <div class="product-info">
+                    <h3>Homemade Bread</h3>
+                    <p>Fresh and delicious bread from local producers.</p>
+                    <div class="price">₹80 / loaf</div>
+                    <button class="add-btn" type="button">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product"
+                data-id="local-honey"
+                data-name="Natural Honey"
+                data-price="200"
+                data-emoji="🍯">
+
+                <img
+                    src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=500"
+                    alt="Natural honey"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/500x350/f0dfce/80451f?text=Natural+Honey'">
+
+                <div class="product-info">
+                    <h3>Natural Honey</h3>
+                    <p>Sweet honey sourced from local producers.</p>
+                    <div class="price">₹200 / jar</div>
+                    <button class="add-btn" type="button">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product"
+                data-id="local-clay-pots"
+                data-name="Clay Pots"
+                data-price="150"
+                data-emoji="🏺">
+
+                <img
+                    src="https://images.unsplash.com/photo-1603905179139-d6f4c9c0d0c8?w=500"
+                    alt="Traditional clay pots"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/500x350/f0dfce/80451f?text=Clay+Pots'">
+
+                <div class="product-info">
+                    <h3>Clay Pots</h3>
+                    <p>Traditional handmade pots made by local artisans.</p>
+                    <div class="price">₹150 / piece</div>
+                    <button class="add-btn" type="button">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product"
+                data-id="local-natural-products"
+                data-name="Natural Products"
+                data-price="250"
+                data-emoji="🌿">
+
+                <img
+                    src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500"
+                    alt="Natural everyday products"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/500x350/f0dfce/80451f?text=Natural+Products'">
+
+                <div class="product-info">
+                    <h3>Natural Products</h3>
+                    <p>Useful everyday products from local businesses.</p>
+                    <div class="price">₹250 / item</div>
+                    <button class="add-btn" type="button">Add to Cart</button>
+                </div>
+            </article>
+
+        </section>
+
+        <div id="noResults">
+            <h3>No products found 😕</h3>
+            <p>Try searching for another product name.</p>
         </div>
 
-        <div class="product">
-            <img src="https://images.unsplash.com/photo-1603905179139-d6f4c9c0d0c8?w=400"
-                 alt="Handmade pottery">
-            <h2>Clay Pots</h2>
-            <p>Traditional handmade clay pots.</p>
-            <p class="price">₹150 / piece</p>
-            <button onclick="alert('Thank you for your interest in Clay Pots!')">
-                Buy Now
-            </button>
-        </div>
-
-        <div class="product">
-            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400"
-                 alt="Natural handmade products">
-            <h2>Natural Products</h2>
-            <p>Simple products for everyday use.</p>
-            <p class="price">₹250 / item</p>
-            <button onclick="alert('Thank you for your interest in Natural Products!')">
-                Buy Now
-            </button>
-        </div>
-
-    </section>
+    </main>
 
     <footer>
-        <p>© 2026 Local Products Store. All Rights Reserved.</p>
-        <p>Made with ❤️ to Support Local Businesses</p>
+        <p>© 2026 GramBazaar. All Rights Reserved.</p>
+        <p>Made with ❤️ to support local businesses.</p>
     </footer>
+
+    <script src="common-nav.js"></script>
+
+    <script>
+        const CART_KEY = "gb-cart";
+
+        function getCart() {
+            try {
+                const cart = JSON.parse(
+                    localStorage.getItem(CART_KEY) || "[]"
+                );
+
+                return Array.isArray(cart) ? cart : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+            if (
+                window.GBNav &&
+                typeof window.GBNav.refreshCartCount === "function"
+            ) {
+                window.GBNav.refreshCartCount();
+            }
+
+            window.dispatchEvent(new Event("gb-cart-updated"));
+        }
+
+        document.querySelectorAll(".product").forEach(function (card) {
+            const button = card.querySelector(".add-btn");
+
+            button.addEventListener("click", function () {
+                const product = {
+                    id: card.dataset.id,
+                    name: card.dataset.name,
+                    price: Number(card.dataset.price),
+                    emoji: card.dataset.emoji,
+                    quantity: 1
+                };
+
+                const cart = getCart();
+
+                const existingProduct = cart.find(
+                    item => item.id === product.id
+                );
+
+                if (existingProduct) {
+                    existingProduct.quantity =
+                        (Number(existingProduct.quantity) || 0) + 1;
+                } else {
+                    cart.push(product);
+                }
+
+                saveCart(cart);
+
+                button.textContent = "✓ Added to Cart";
+
+                setTimeout(function () {
+                    button.textContent = "Add to Cart";
+                }, 1000);
+            });
+        });
+
+        const searchInput = document.getElementById("productSearch");
+        const noResults = document.getElementById("noResults");
+
+        searchInput.addEventListener("input", function () {
+            const term = searchInput.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            document.querySelectorAll(".product").forEach(function (card) {
+                const matches = card.dataset.name
+                    .toLowerCase()
+                    .includes(term);
+
+                card.style.display = matches ? "" : "none";
+
+                if (matches) visibleCount++;
+            });
+
+            noResults.style.display =
+                visibleCount === 0 ? "block" : "none";
+        });
+    </script>
 
 </body>
 </html>
