@@ -1,153 +1,680 @@
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Cart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#075c32">
+  <title>My Cart | GramBazaar</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
+  <style>
+    :root {
+      --green: #075c32;
+      --green-light: #eaf7ed;
+      --gold: #e9b45b;
+      --cream: #fffaf0;
+      --text: #26332a;
+      --muted: #718076;
+      --border: #e6ece7;
+      --white: #fff;
+    }
 
-        .cart-container {
-            max-width: 800px;
-            margin: 30px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px #ddd;
-        }
+    * { box-sizing: border-box; }
 
-        h2 {
-            text-align: center;
-            color: #333;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
-            gap: 10px;
-        }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
 
-        .cart-item input {
-            width: 50px;
-            padding: 5px;
-        }
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 35px 20px 60px;
+    }
 
-        .remove-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+    .page-heading {
+      margin-bottom: 25px;
+    }
 
-        .total {
-            text-align: right;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
+    .eyebrow {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 
-        .checkout-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .page-heading h1 {
+      margin: 7px 0;
+      color: var(--green);
+      font-size: clamp(28px, 5vw, 40px);
+    }
 
-        @media (max-width: 500px) {
-            .cart-item {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+    .page-heading p { color: var(--muted); margin: 0; }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(270px, .8fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px #173c2008;
+      padding: 24px;
+    }
+
+    .panel h2 {
+      margin: 0 0 20px;
+      font-size: 21px;
+      color: var(--green);
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 65px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item:first-child { padding-top: 0; }
+
+    .product-emoji {
+      width: 65px;
+      height: 65px;
+      border-radius: 12px;
+      background: var(--green-light);
+      display: grid;
+      place-items: center;
+      font-size: 31px;
+    }
+
+    .product-name { font-weight: 800; }
+    .product-price { color: var(--muted); font-size: 14px; }
+
+    .item-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 9px;
+      flex-wrap: wrap;
+    }
+
+    .quantity {
+      width: 68px;
+      padding: 7px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: white;
+    }
+
+    .remove-btn {
+      border: 0;
+      background: #fff0f0;
+      color: #b4232c;
+      padding: 7px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .remove-btn:hover { background: #ffe0e0; }
+
+    .item-subtotal {
+      text-align: right;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .empty-cart .emoji { font-size: 60px; }
+    .empty-cart h3 { margin-bottom: 5px; }
+    .empty-cart p { color: var(--muted); }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 16px;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn:hover { background: #064825; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .btn-outline {
+      background: white;
+      color: var(--green);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover { background: var(--green-light); }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 14px 0;
+      color: var(--muted);
+    }
+
+    .summary-row strong { color: var(--text); }
+
+    .summary-total {
+      padding-top: 17px;
+      border-top: 1px dashed #cbd8cc;
+      margin-top: 20px;
+      font-size: 19px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .checkout-btn { width: 100%; margin-top: 15px; }
+    .secure-note { font-size: 12px; color: var(--muted); margin-top: 15px; }
+
+    .continue-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Checkout popup */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #0d2118b8;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-box {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 70px #0003;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: #f0f4f0;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .modal-box h2 { color: var(--green); margin: 0 35px 5px 0; }
+    .modal-description { color: var(--muted); font-size: 14px; }
+
+    .order-preview {
+      background: #f6faf5;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px;
+      margin: 18px 0;
+    }
+
+    .order-preview h3 { margin: 0 0 10px; font-size: 16px; }
+
+    .preview-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .form-label {
+      display: block;
+      margin: 13px 0 5px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #d6e0d6;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .form-input:focus { border-color: var(--green); }
+
+    .whatsapp-btn {
+      width: 100%;
+      margin-top: 16px;
+      background: #168447;
+    }
+
+    .whatsapp-btn:hover { background: #116b39; }
+
+    .popup-note { color: var(--muted); font-size: 12px; margin-top: 12px; }
+
+    @media (max-width: 760px) {
+      .cart-layout { grid-template-columns: 1fr; }
+      .page-wrap { padding: 25px 14px 45px; }
+      .panel { padding: 18px; }
+    }
+
+    @media (max-width: 430px) {
+      .cart-item {
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 11px;
+      }
+
+      .product-emoji { width: 52px; height: 52px; font-size: 26px; }
+      .item-subtotal { grid-column: 2; text-align: left; }
+      .modal-box { padding: 22px 17px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="cart-container">
-    <h2>My Shopping Cart</h2>
+  <!-- Shared navigation is rendered by common-nav.js -->
+  <div id="gb-common-nav"></div>
 
-    <div id="cart-items">
-        <div class="cart-item" data-price="500">
-            <span>Product 1</span>
-            <span>₹500</span>
-            <input type="number" min="1" value="1"
-                   onchange="updateTotal()">
-            <button class="remove-btn"
-                    onclick="removeItem(this)">Remove</button>
-        </div>
-
-        <div class="cart-item" data-price="800">
-            <span>Product 2</span>
-            <span>₹800</span>
-            <input type="number" min="1" value="1"
-                   onchange="updateTotal()">
-            <button class="remove-btn"
-                    onclick="removeItem(this)">Remove</button>
-        </div>
+  <main class="page-wrap">
+    <div class="page-heading">
+      <div class="eyebrow">Your Shopping Bag</div>
+      <h1>🛒 My Shopping Cart</h1>
+      <p>Review your items, update quantities and prepare your order.</p>
     </div>
 
-    <div class="total">
-        Total: ₹<span id="total">1300</span>
+    <div class="cart-layout">
+      <section class="panel">
+        <h2>Your Items (<span id="item-count">0</span>)</h2>
+
+        <div id="cart-items" aria-live="polite"></div>
+
+        <div id="empty-cart" class="empty-cart" hidden>
+          <div class="emoji">🧺</div>
+          <h3>Your cart is empty</h3>
+          <p>Explore our collections and add something you love.</p>
+          <a class="btn" href="index.html#products">Explore Products</a>
+        </div>
+
+        <a class="continue-link" href="index.html#products">← Continue Shopping</a>
+      </section>
+
+      <aside class="panel">
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Items subtotal</span>
+          <strong id="subtotal">₹0</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Delivery charges</span>
+          <strong id="delivery">Confirmed later</strong>
+        </div>
+
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <strong id="grand-total">₹0</strong>
+        </div>
+
+        <button class="btn checkout-btn" id="checkout-btn" type="button">
+          Proceed to Checkout →
+        </button>
+
+        <p class="secure-note">
+          ℹ️ Delivery charges and product availability will be confirmed before
+          your order is accepted. No payment is taken on this page.
+        </p>
+      </aside>
     </div>
+  </main>
 
-    <button class="checkout-btn" onclick="checkout()">
-        Proceed to Checkout
-    </button>
-</div>
+  <!-- Checkout confirmation popup -->
+  <div class="modal" id="checkout-modal" role="dialog"
+       aria-modal="true" aria-labelledby="checkout-title">
+    <div class="modal-box">
+      <button class="modal-close" id="close-modal" type="button"
+              aria-label="Close checkout popup">×</button>
 
-<script>
-    function updateTotal() {
-        let total = 0;
+      <h2 id="checkout-title">📦 Confirm Your Order</h2>
+      <p class="modal-description">
+        Check your order summary and enter your contact details.
+      </p>
 
-        document.querySelectorAll(".cart-item").forEach(item => {
-            const price = Number(item.dataset.price);
-            const quantity = Math.max(
-                1,
-                Number(item.querySelector("input").value) || 1
-            );
+      <div class="order-preview">
+        <h3>Order Summary</h3>
+        <div id="order-preview-items"></div>
+        <div class="preview-line" style="border-top:1px solid #dce7dc;padding-top:10px">
+          <strong>Subtotal</strong>
+          <strong id="preview-total">₹0</strong>
+        </div>
+        <p class="popup-note">
+          Delivery charges and availability will be confirmed by the shop.
+        </p>
+      </div>
 
-            item.querySelector("input").value = quantity;
-            total += price * quantity;
+      <form id="order-form">
+        <label class="form-label" for="customer-name">Your name</label>
+        <input class="form-input" id="customer-name" name="customerName"
+               type="text" maxlength="80" autocomplete="name"
+               placeholder="Enter your name" required>
+
+        <label class="form-label" for="customer-phone">Contact number</label>
+        <input class="form-input" id="customer-phone" name="customerPhone"
+               type="tel" inputmode="numeric" autocomplete="tel"
+               maxlength="15" placeholder="Enter your phone number" required>
+
+        <label class="form-label" for="customer-address">Delivery address</label>
+        <textarea class="form-input" id="customer-address" name="customerAddress"
+                  rows="3" maxlength="400" autocomplete="street-address"
+                  placeholder="Village, area and full address" required></textarea>
+
+        <button class="btn whatsapp-btn" type="submit">
+          💬 Send Order via WhatsApp
+        </button>
+      </form>
+
+      <p class="popup-note">
+        WhatsApp will open with your order details. You must press Send in
+        WhatsApp to send the message. This page does not process payment or
+        automatically save a confirmed order.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    /*
+      IMPORTANT:
+      Enter your shop's WhatsApp number below.
+      Indian format: 91 + 10-digit mobile number.
+      Use digits only, without +, spaces or dashes.
+    */
+    const SHOP_WHATSAPP_NUMBER = "91YOURMOBILENUMBER";
+
+    /*
+      This cart uses the shared localStorage key "gb-cart".
+      Supported product example:
+      { id: "apple", name: "Fresh Apples", price: 150,
+        quantity: 2, emoji: "🍎" }
+
+      If your homepage uses another cart storage format, connect that format
+      here so both pages share the same products.
+    */
+
+    const CART_KEY = "gb-cart";
+    const cartContainer = document.getElementById("cart-items");
+    const emptyCart = document.getElementById("empty-cart");
+    const modal = document.getElementById("checkout-modal");
+
+    function formatRupees(amount) {
+      return "₹" + Number(amount).toLocaleString("en-IN", {
+        maximumFractionDigits: 2
+      });
+    }
+
+    function getCart() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        if (!Array.isArray(stored)) return [];
+
+        return stored.filter(item =>
+          item &&
+          typeof item.name === "string" &&
+          Number.isFinite(Number(item.price)) &&
+          Number(item.price) >= 0
+        ).map(item => ({
+          ...item,
+          price: Number(item.price),
+          quantity: Math.max(1, Math.floor(Number(item.quantity) || 1)),
+          name: item.name.slice(0, 150),
+          emoji: item.emoji || "🛍️"
+        }));
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+      // Update the shared navbar's count on this page.
+      if (window.GBNav && typeof window.GBNav.refreshCartCount === "function") {
+        window.GBNav.refreshCartCount();
+      }
+
+      // Notify other open tabs.
+      window.dispatchEvent(new StorageEvent("storage", {
+        key: CART_KEY,
+        newValue: JSON.stringify(cart)
+      }));
+    }
+
+    function getSubtotal(cart = getCart()) {
+      return cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      cartContainer.replaceChildren();
+
+      document.getElementById("item-count").textContent =
+        cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      emptyCart.hidden = cart.length > 0;
+
+      cart.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "cart-item";
+
+        const emoji = document.createElement("div");
+        emoji.className = "product-emoji";
+        emoji.textContent = item.emoji;
+
+        const details = document.createElement("div");
+
+        const name = document.createElement("div");
+        name.className = "product-name";
+        name.textContent = item.name;
+
+        const price = document.createElement("div");
+        price.className = "product-price";
+        price.textContent = formatRupees(item.price) + " each";
+
+        const controls = document.createElement("div");
+        controls.className = "item-controls";
+
+        const quantity = document.createElement("input");
+        quantity.className = "quantity";
+        quantity.type = "number";
+        quantity.min = "1";
+        quantity.max = "99";
+        quantity.value = item.quantity;
+        quantity.setAttribute("aria-label", "Quantity for " + item.name);
+
+        quantity.addEventListener("change", () => {
+          const updated = getCart();
+          const value = Math.max(1, Math.min(99,
+            Math.floor(Number(quantity.value) || 1)));
+
+          if (updated[index]) {
+            updated[index].quantity = value;
+            saveCart(updated);
+            renderCart();
+          }
         });
 
-        document.getElementById("total").textContent = total;
+        const remove = document.createElement("button");
+        remove.className = "remove-btn";
+        remove.type = "button";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", () => {
+          const updated = getCart();
+          updated.splice(index, 1);
+          saveCart(updated);
+          renderCart();
+        });
+
+        controls.append(quantity, remove);
+        details.append(name, price, controls);
+
+        const lineTotal = document.createElement("div");
+        lineTotal.className = "item-subtotal";
+        lineTotal.textContent = formatRupees(item.price * item.quantity);
+
+        row.append(emoji, details, lineTotal);
+        cartContainer.appendChild(row);
+      });
+
+      const subtotal = getSubtotal(cart);
+      document.getElementById("subtotal").textContent = formatRupees(subtotal);
+      document.getElementById("grand-total").textContent = formatRupees(subtotal);
+      document.getElementById("checkout-btn").disabled = cart.length === 0;
     }
 
-    function removeItem(button) {
-        button.closest(".cart-item").remove();
-        updateTotal();
+    function openCheckout() {
+      const cart = getCart();
+
+      if (cart.length === 0) {
+        alert("Your cart is empty. Please add products first.");
+        return;
+      }
+
+      const preview = document.getElementById("order-preview-items");
+      preview.replaceChildren();
+
+      cart.forEach(item => {
+        const line = document.createElement("div");
+        line.className = "preview-line";
+
+        const name = document.createElement("span");
+        name.textContent = item.emoji + " " + item.name + " × " + item.quantity;
+
+        const price = document.createElement("strong");
+        price.textContent = formatRupees(item.price * item.quantity);
+
+        line.append(name, price);
+        preview.appendChild(line);
+      });
+
+      document.getElementById("preview-total").textContent =
+        formatRupees(getSubtotal(cart));
+
+      modal.classList.add("open");
+      document.getElementById("customer-name").focus();
     }
 
-    function checkout() {
-        if (!document.querySelector(".cart-item")) {
-            alert("Your cart is empty!");
-            return;
-        }
-
-        alert("Proceeding to checkout!");
+    function closeCheckout() {
+      modal.classList.remove("open");
     }
 
-    updateTotal();
-</script>
+    document.getElementById("checkout-btn").addEventListener("click", openCheckout);
+    document.getElementById("close-modal").addEventListener("click", closeCheckout);
 
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeCheckout();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeCheckout();
+    });
+
+    document.getElementById("order-form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const cart = getCart();
+      if (!cart.length) {
+        closeCheckout();
+        renderCart();
+        alert("Your cart is empty.");
+        return;
+      }
+
+      if (!/^91\d{10}$/.test(SHOP_WHATSAPP_NUMBER)) {
+        alert("Please set your shop WhatsApp number in the code first.");
+        return;
+      }
+
+      const customerName = document.getElementById("customer-name").value.trim();
+      const customerPhone = document.getElementById("customer-phone").value.trim();
+      const customerAddress = document.getElementById("customer-address").value.trim();
+
+      if (!customerName || !customerPhone || !customerAddress) {
+        alert("Please complete all the contact and delivery fields.");
+        return;
+      }
+
+      const itemsText = cart.map((item, index) =>
+        `${index + 1}. ${item.name} x ${item.quantity} = ${formatRupees(item.price * item.quantity)}`
+      ).join("\n");
+
+      const message =
+`Hello GramBazaar! I would like to place an order.
+
+Customer: ${customerName}
+Contact: ${customerPhone}
+Delivery address: ${customerAddress}
+
+ORDER ITEMS
+${itemsText}
+
+Subtotal: ${formatRupees(getSubtotal(cart))}
+Delivery: Please confirm
+Total: Delivery charges to be confirmed
+
+Please confirm availability and delivery charges before accepting my order. Thank you!`;
+
+      const url =
+        "https://wa.me/" + SHOP_WHATSAPP_NUMBER +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    renderCart();
+  </script>
+
+  <!-- Load shared navbar after its placeholder. -->
+  <script src="common-nav.js"></script>
 </body>
 </html>
-
