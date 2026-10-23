@@ -1,1 +1,176 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Products Store</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fffaf0;
+        }
+
+        header {
+            background-color: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 12px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: orange;
+        }
+
+        .intro {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: white;
+            width: 220px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px #cccccc;
+        }
+
+        .product img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product h2 {
+            color: #8b4513;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a0522d;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🏡 Local Products Store</h1>
+        <p>Support Local Sellers and Shop Local Products!</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="Fruits.html">Fruits</a>
+        <a href="Groceries.html">Groceries</a>
+        <a href="Handmade-crafts.html">Handmade Crafts</a>
+        <a href="local-products.html">Local Products</a>
+    </nav>
+
+    <section class="intro">
+        <h2>Our Local Products</h2>
+        <p>Discover quality products made and sold by local communities.</p>
+    </section>
+
+    <section class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484df?w=400"
+                 alt="Fresh homemade bread">
+            <h2>Homemade Bread</h2>
+            <p>Fresh and delicious local bread.</p>
+            <p class="price">₹80 / loaf</p>
+            <button onclick="alert('Thank you for your interest in Homemade Bread!')">
+                Buy Now
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=400"
+                 alt="Natural honey">
+            <h2>Natural Honey</h2>
+            <p>Sweet honey from local producers.</p>
+            <p class="price">₹200 / jar</p>
+            <button onclick="alert('Thank you for your interest in Natural Honey!')">
+                Buy Now
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1603905179139-d6f4c9c0d0c8?w=400"
+                 alt="Handmade pottery">
+            <h2>Clay Pots</h2>
+            <p>Traditional handmade clay pots.</p>
+            <p class="price">₹150 / piece</p>
+            <button onclick="alert('Thank you for your interest in Clay Pots!')">
+                Buy Now
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400"
+                 alt="Natural handmade products">
+            <h2>Natural Products</h2>
+            <p>Simple products for everyday use.</p>
+            <p class="price">₹250 / item</p>
+            <button onclick="alert('Thank you for your interest in Natural Products!')">
+                Buy Now
+            </button>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Local Products Store. All Rights Reserved.</p>
+        <p>Made with ❤️ to Support Local Businesses</p>
+    </footer>
+
+</body>
+</html>
