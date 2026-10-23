@@ -1,149 +1,402 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Online Store</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GarmBazaar | Online Store</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5fff5;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-        header {
-            background-color: #228b22;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f7faf5;
+    color: #243128;
+}
 
-        nav {
-            background-color: #333;
-            padding: 15px;
-            text-align: center;
-        }
+header {
+    background: linear-gradient(135deg, #176b38, #299c50);
+    color: white;
+    text-align: center;
+    padding: 32px 15px;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 15px;
-            font-size: 16px;
-        }
+header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    margin-bottom: 10px;
+}
 
-        nav a:hover {
-            color: yellow;
-        }
+header p {
+    font-size: 16px;
+}
 
-        .welcome {
-            text-align: center;
-            padding: 30px 15px;
-        }
+nav {
+    background: #173b28;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 
-        .products {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+}
 
-        .card {
-            background-color: white;
-            width: 250px;
-            padding: 20px;
-            text-align: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px #cccccc;
-        }
+nav a:hover {
+    background: #2b9450;
+}
 
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+.hero {
+    text-align: center;
+    padding: 65px 20px;
+    background: linear-gradient(120deg, #e1f5df, #fff8e6);
+}
 
-        .card h2 {
-            color: #228b22;
-        }
+.hero h2 {
+    font-size: clamp(28px, 5vw, 42px);
+    color: #176b38;
+    margin-bottom: 16px;
+}
 
-        .card a {
-            display: inline-block;
-            background-color: #228b22;
-            color: white;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 5px;
-        }
+.hero p {
+    max-width: 650px;
+    margin: 0 auto 25px;
+    line-height: 1.7;
+    color: #526256;
+}
 
-        .card a:hover {
-            background-color: #155d15;
-        }
+.btn {
+    display: inline-block;
+    background: #218744;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
 
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 25px;
-        }
-    </style>
+.btn:hover {
+    background: #145e2d;
+}
+
+.section {
+    padding: 45px 20px;
+    max-width: 1200px;
+    margin: auto;
+    scroll-margin-top: 75px;
+}
+
+.section h2 {
+    text-align: center;
+    color: #176b38;
+    margin-bottom: 12px;
+    font-size: 30px;
+}
+
+.description {
+    text-align: center;
+    color: #68756a;
+    margin-bottom: 30px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #193c2012;
+    border: 1px solid #e6eee5;
+    transition: transform 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #e8eee7;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card h3 {
+    color: #236c3a;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #647067;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.category {
+    display: inline-block;
+    font-size: 12px;
+    color: #23753c;
+    background: #e4f6e6;
+    border-radius: 20px;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+}
+
+footer {
+    background: #173b28;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+    line-height: 1.9;
+}
+
+footer a {
+    color: #b9f6c7;
+}
+
+.notice {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 420px;
+    padding: 18px;
+    background: #173b28;
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 25px #0003;
+    z-index: 20;
+}
+
+.notice button {
+    margin-top: 12px;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    nav {
+        gap: 2px;
+    }
+
+    nav a {
+        padding: 9px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 45px 16px;
+    }
+
+    .section {
+        padding: 35px 15px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>🛍️ My Online Store</h1>
-        <p>Fresh Products and Beautiful Handmade Items</p>
-    </header>
+<header id="home">
+    <h1>🛍️ GarmBazaar</h1>
+    <p>Your favourite destination for fresh products and handmade crafts!</p>
+</header>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="Fruits.html">Fruits</a>
-        <a href="Groceries.html">Groceries</a>
-        <a href="Handmade-crafts.html">Handmade Crafts</a>
-    </nav>
+<nav>
+    <a href="#home">🏠 Home</a>
+    <a href="#fruits">🍎 Fruits</a>
+    <a href="#groceries">🛒 Groceries</a>
+    <a href="#crafts">🎨 Handmade Crafts</a>
+</nav>
 
-    <section class="welcome">
-        <h2>Welcome to Our Store!</h2>
-        <p>Explore fresh fruits, daily groceries, and beautiful handmade crafts.</p>
-    </section>
+<section class="hero">
+    <h2>Welcome to GarmBazaar!</h2>
+    <p>
+        Discover fresh fruits, everyday grocery essentials and
+        unique handmade creations. Explore our collections below.
+    </p>
+    <a href="#collections" class="btn">Explore Collections ↓</a>
+</section>
 
-    <section class="products">
+<section class="section" id="collections">
+    <h2>Our Collections</h2>
+    <p class="description">Choose a category and discover something special.</p>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400"
-                 alt="Fresh fruits">
-            <h2>Fresh Fruits</h2>
-            <p>Enjoy delicious and healthy fruits every day.</p>
-            <a href="Fruits.html">Explore Fruits</a>
-        </div>
+    <div class="products">
+        <article class="card">
+            <img
+                src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"
+                alt="Fresh apples and fruits">
+            <div class="card-content">
+                <span class="category">Fresh & Healthy</span>
+                <h3>Fresh Fruits 🍎</h3>
+                <p>Explore delicious fruits for your everyday meals.</p>
+                <a class="btn" href="#fruits">Explore Fruits</a>
+            </div>
+        </article>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400"
-                 alt="Grocery products">
-            <h2>Groceries</h2>
-            <p>Find everyday essentials for your home.</p>
-            <a href="Groceries.html">Explore Groceries</a>
-        </div>
+        <article class="card">
+            <img
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80"
+                alt="Fresh grocery vegetables">
+            <div class="card-content">
+                <span class="category">Everyday Essentials</span>
+                <h3>Groceries 🛒</h3>
+                <p>Discover everyday kitchen and household essentials.</p>
+                <a class="btn" href="#groceries">Explore Groceries</a>
+            </div>
+        </article>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400"
-                 alt="Handmade crafts">
-            <h2>Handmade Crafts</h2>
-            <p>Discover unique and creative handmade products.</p>
-            <a href="Handmade-crafts.html">Explore Crafts</a>
-        </div>
+        <article class="card">
+            <img
+                src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=600&q=80"
+                alt="Creative handmade craft materials">
+            <div class="card-content">
+                <span class="category">Made with Love</span>
+                <h3>Handmade Crafts 🎨</h3>
+                <p>Find creative inspiration and beautiful handmade items.</p>
+                <a class="btn" href="#crafts">Explore Crafts</a>
+            </div>
+        </article>
+    </div>
+</section>
 
-    </section>
+<section class="section" id="fruits">
+    <h2>🍎 Fresh Fruits</h2>
+    <p class="description">Fresh ideas for a colourful fruit basket.</p>
 
-    <footer>
-        <p>© 2026 My Online Store. All Rights Reserved.</p>
-    </footer>
+    <div class="products">
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"
+                 alt="Red apples">
+            <div class="card-content">
+                <h3>Fresh Apples</h3>
+                <p>Delicious fruit for your everyday routine.</p>
+                <button class="btn" onclick="showNotice('Fresh Apples')">Enquire Now</button>
+            </div>
+        </article>
+
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80"
+                 alt="Fresh bananas">
+            <div class="card-content">
+                <h3>Fresh Bananas</h3>
+                <p>A versatile fruit for snacks and breakfast.</p>
+                <button class="btn" onclick="showNotice('Fresh Bananas')">Enquire Now</button>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="section" id="groceries">
+    <h2>🛒 Groceries</h2>
+    <p class="description">Everyday essentials for your home.</p>
+
+    <div class="products">
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80"
+                 alt="Fresh vegetables">
+            <div class="card-content">
+                <h3>Fresh Vegetables</h3>
+                <p>Explore vegetables for your favourite recipes.</p>
+                <button class="btn" onclick="showNotice('Fresh Vegetables')">Enquire Now</button>
+            </div>
+        </article>
+
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80"
+                 alt="Food and pantry ingredients">
+            <div class="card-content">
+                <h3>Kitchen Essentials</h3>
+                <p>Discover useful pantry and cooking essentials.</p>
+                <button class="btn" onclick="showNotice('Kitchen Essentials')">Enquire Now</button>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="section" id="crafts">
+    <h2>🎨 Handmade Crafts</h2>
+    <p class="description">Creative finds and unique handmade inspiration.</p>
+
+    <div class="products">
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=600&q=80"
+                 alt="Handmade art materials">
+            <div class="card-content">
+                <h3>Creative Art</h3>
+                <p>Explore artistic ideas and creative supplies.</p>
+                <button class="btn" onclick="showNotice('Creative Art')">Enquire Now</button>
+            </div>
+        </article>
+
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=600&q=80"
+                 alt="Handcrafted decorative items">
+            <div class="card-content">
+                <h3>Decorative Crafts</h3>
+                <p>Add a personal touch to your home with creative decor.</p>
+                <button class="btn" onclick="showNotice('Decorative Crafts')">Enquire Now</button>
+            </div>
+        </article>
+    </div>
+</section>
+
+<footer>
+    <h3>🛍️ GarmBazaar</h3>
+    <p>Fresh finds. Creative minds. Everyday essentials.</p>
+    <p>© 2026 GarmBazaar. All rights reserved.</p>
+    <a href="#home">Back to Top ↑</a>
+</footer>
+
+<div class="notice" id="notice" role="status" aria-live="polite">
+    <p id="noticeText"></p>
+    <button onclick="closeNotice()">Close</button>
+</div>
+
+<script>
+function showNotice(product) {
+    document.getElementById("noticeText").textContent =
+        product + " selected! Contact the store to check availability and order.";
+    document.getElementById("notice").style.display = "block";
+}
+
+function closeNotice() {
+    document.getElementById("notice").style.display = "none";
+}
+</script>
 
 </body>
 </html>
