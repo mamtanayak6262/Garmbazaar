@@ -1,1 +1,94 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5fff0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: green;
+        }
+
+        .groceries {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .item {
+            background-color: white;
+            width: 180px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px #cccccc;
+        }
+
+        .item img {
+            width: 150px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .item h2 {
+            color: #ff6600;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🛒 Welcome to Grocery Store</h1>
+    <p>Fresh and quality products for your home!</p>
+
+    <div class="groceries">
+
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300"
+                 alt="Rice">
+            <h2>Rice</h2>
+            <p class="price">₹60 / kg</p>
+        </div>
+
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300"
+                 alt="Cooking Oil">
+            <h2>Cooking Oil</h2>
+            <p class="price">₹150 / litre</p>
+        </div>
+
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300"
+                 alt="Wheat">
+            <h2>Wheat</h2>
+            <p class="price">₹35 / kg</p>
+        </div>
+
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=300"
+                 alt="Honey">
+            <h2>Honey</h2>
+            <p class="price">₹200 / jar</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
